@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins-trial
+  namespace: jenkins-trial
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins-trial
+  template:
+    metadata:
+      labels:
+        app: jenkins-trial
+    spec:
+      containers:
+        - name: react-app
+          image: 172.19.62.235:5000/jenkins-trial:current
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
