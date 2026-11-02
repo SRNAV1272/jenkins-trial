@@ -5,6 +5,11 @@ pipeline {
     options {
         disableConcurrentBuilds()
         timestamps()
+
+        // Keep only the latest 5 builds
+        buildDiscarder(logRotator(
+            numToKeepStr: '4'
+        ))
     }
 
     environment {
